@@ -40,25 +40,23 @@ def generate_qr():
 
     pass
 
-raspberry_pi_ip = "http://127.0.0.1:5000"
+# raspberry_pi_ip = "http://127.0.0.1:5000"
 
-@qr_routes.route("/send_open_door_command", methods=["POST"])
-def send_open_door_command():
-    # Send the command to open the door to the Raspberry Pi (localhost) callback
-    try:
-        response = requests.get(f"{raspberry_pi_ip}/open_door_callback")
-        if response.status_code == 200:
-            return jsonify({"message": "Open door command sent successfully"})
-        else:
-            return jsonify({"error": "Failed to send open door command"}), 500
-    except requests.ConnectionError:
-        return jsonify({"error": "Could not connect to the Raspberry Pi"}), 500
+# @qr_routes.route("/send_open_door_command", methods=["POST"])
+# def send_open_door_command():
+#     # Send the command to open the door to the Raspberry Pi (localhost) callback
+#     try:
+#         response = requests.get(f"{raspberry_pi_ip}/open_door_callback")
+#         if response.status_code == 200:
+#             return jsonify({"message": "Open door command sent successfully"})
+#         else:
+#             return jsonify({"error": "Failed to send open door command"}), 500
+#     except requests.ConnectionError:
+#         return jsonify({"error": "Could not connect to the Raspberry Pi"}), 500
 
 # qr_routes.register_blueprint(qr_routes)
 
-@qr_routes.route("/", methods=["GET"])
-def index():
-    return render_template("qr.html")
+
 
 if __name__ == "__main__":
     qrapp.run(debug=True,port=50001)
