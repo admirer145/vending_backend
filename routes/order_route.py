@@ -17,8 +17,6 @@ def clear_orders():
 
     return jsonify({"message": "All orders cleared successfully"})
 
-@order_routes.route("/save_order", methods=["POST"])
-# ...
 
 @order_routes.route("/save_order", methods=["POST"])
 def save_order():
@@ -38,13 +36,14 @@ def save_order():
     date = order_data.get("date")
     time = order_data.get("time")
     machine = order_data.get("machine")
+
     conn = sqlite3.connect('orders.db')
     cursor = conn.cursor()
 
     # Insert the order details into the database
     cursor.execute('''
-        INSERT INTO orders (user_id, picked_pkg, left_pkg, total_pkg, date, time)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO orders (user_id, picked_pkg, left_pkg, total_pkg, date, time, machine)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     ''', (user_id, picked_pkg, left_pkg, total_pkg, date, time, machine))
 
     conn.commit()
