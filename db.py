@@ -16,7 +16,8 @@ cursor.execute('''
         left_pkg INTEGER,
         total_pkg INTEGER,
         date TEXT,
-        time TEXT
+        time TEXT,
+        machine TEXT
     )
 ''')
 
