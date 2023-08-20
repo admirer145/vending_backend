@@ -26,21 +26,17 @@ def save_order():
         return jsonify({"error": "No JSON data provided"}), 400
 
     user_id = order_data.get("user_id")
-    if user_id is None:
-        return jsonify({"error": "user_id field is missing in JSON data"}), 400
+    machine = order_data.get("machine")  # Extract the machine name from the JSON data
 
-    # Extract individual fields from order_data
     picked_pkg = order_data.get("picked_pkg")
     left_pkg = order_data.get("left_pkg")
     total_pkg = order_data.get("total_pkg")
     date = order_data.get("date")
     time = order_data.get("time")
-    machine = order_data.get("machine")
 
     conn = sqlite3.connect('orders.db')
     cursor = conn.cursor()
 
-    # Insert the order details into the database
     cursor.execute('''
         INSERT INTO orders (user_id, picked_pkg, left_pkg, total_pkg, date, time, machine)
         VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -62,19 +58,19 @@ def get_all_orders():
 
     conn.close()
 
-    # Converting data to a list of dictionaries for JSON serialization
     orders_list = []
     for order in orders:
         order_dict = {
             "id": order[0],
             "user_id": order[1],
-            "picked_pkg": order[2],   # Use the correct column index
-            "left_pkg": order[3],     # Use the correct column index
-            "total_pkg": order[4],    # Use the correct column index
+            "picked_pkg": order[2],
+            "left_pkg": order[3],
+            "total_pkg": order[4],
             "date": order[5],
             "time": order[6],
-            "machine": order[7]
+            "machine": order[7]  # Adjust this index based on your schema order
         }
         orders_list.append(order_dict)
 
     return jsonify({"orders": orders_list})
+
