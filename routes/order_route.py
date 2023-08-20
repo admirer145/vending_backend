@@ -37,7 +37,7 @@ def save_order():
     total_pkg = order_data.get("total_pkg")
     date = order_data.get("date")
     time = order_data.get("time")
-
+    machine = order_data.get("machine")
     conn = sqlite3.connect('orders.db')
     cursor = conn.cursor()
 
@@ -45,7 +45,7 @@ def save_order():
     cursor.execute('''
         INSERT INTO orders (user_id, picked_pkg, left_pkg, total_pkg, date, time)
         VALUES (?, ?, ?, ?, ?, ?)
-    ''', (user_id, picked_pkg, left_pkg, total_pkg, date, time))
+    ''', (user_id, picked_pkg, left_pkg, total_pkg, date, time, machine))
 
     conn.commit()
     conn.close()
@@ -73,7 +73,8 @@ def get_all_orders():
             "left_pkg": order[3],     # Use the correct column index
             "total_pkg": order[4],    # Use the correct column index
             "date": order[5],
-            "time": order[6]
+            "time": order[6],
+            "machine": order[7]
         }
         orders_list.append(order_dict)
 
