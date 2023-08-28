@@ -21,4 +21,4 @@ def index():
 
 # Start the server
 if __name__ == "__main__":
-    app.run(SERVER_HOST, port=SERVER_PORT)
+    app.run("0.0.0.0", port=8080)
