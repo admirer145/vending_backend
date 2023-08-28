@@ -1,5 +1,5 @@
 from flask import jsonify
-from models._init_ import cursor
+from models._init_ import cursor, conn
 
 
 def clear_order_data():
@@ -8,23 +8,24 @@ def clear_order_data():
     return jsonify({"message": "All orders cleared successfully"})
 
 
-def save_order_data(order_data):
-    if order_data is None:
+def save_order_data(order_data_json):
+    if order_data_json is None:
         return jsonify({"error": "No JSON data provided"}), 400
 
-    user_id = order_data.get("user_id")
-    machine = order_data.get("machine")  # Extract the machine name from the JSON data
+    user_id = order_data_json.get("user_id")
+    machine = order_data_json.get("machine")  # Extract the machine name from the JSON data
 
-    picked_pkg = order_data.get("picked_pkg")
-    left_pkg = order_data.get("left_pkg")
-    total_pkg = order_data.get("total_pkg")
-    date = order_data.get("date")
-    time = order_data.get("time")
+    picked_pkg = order_data_json.get("picked_pkg")
+    left_pkg = order_data_json.get("left_pkg")
+    total_pkg = order_data_json.get("total_pkg")
+    date = order_data_json.get("date")
+    time = order_data_json.get("time")
 
     cursor.execute('''
         INSERT INTO orders (user_id, picked_pkg, left_pkg, total_pkg, date, time, machine)
         VALUES (?, ?, ?, ?, ?, ?, ?)
     ''', (user_id, picked_pkg, left_pkg, total_pkg, date, time, machine))
+    conn.commit()
 
     return jsonify({"message": "Order details saved successfully"})
 

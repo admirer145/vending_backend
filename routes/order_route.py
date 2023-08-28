@@ -10,7 +10,7 @@ def clear_orders():
     try:
         resp = clear_order_data()
     except Exception as err:
-        raise Exception(f"Error occurred while getting the data: {err}")
+        raise Exception(f"Error occurred while clearing the orders: {err}")
     finally:
         cleanup()
     return resp
@@ -22,7 +22,7 @@ def save_order():
     try:
         resp = save_order_data(order_data)
     except Exception as err:
-        raise Exception(f"Error occurred while getting the data: {err}")
+        raise Exception(f"Error occurred while saving the order: {err}")
     finally:
         cleanup()
     return resp
@@ -33,7 +33,7 @@ def get_all_orders():
     try:
         resp = get_all_orders_data()
     except Exception as err:
-        raise Exception(f"Error occurred while getting the data: {err}")
+        raise Exception(f"Error occurred while getting all the orders: {err}")
     finally:
         cleanup()
     return resp

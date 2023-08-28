@@ -23,7 +23,7 @@ def send_data():
     try:
         resp = prepare_send_data(data)
     except Exception as err:
-        raise Exception(f"Error occurred while getting the data: {err}")
+        raise Exception(f"Error occurred while sending the data: {err}")
     finally:
         cleanup()
     return resp
