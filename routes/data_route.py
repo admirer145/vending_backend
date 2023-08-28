@@ -47,5 +47,5 @@ def send_data():
         return jsonify({"message": "Data saved successfully"})
     else:
         return jsonify({"error": "No data provided"}), 400
-if __name__ == "__main__":
-    app.run("0.0.0.0", port=50001)
+# if __name__ == "__main__":
+#     app.run("0.0.0.0", port=50001)

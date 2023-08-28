@@ -61,8 +61,8 @@ def generate_qr():
     else:
         return jsonify({"error": "Failed to generate the QR code image."}), 500
 
-if __name__ == "__main__":
-    from flask import Flask
-    qrapp = Flask(__name__)
-    qrapp.register_blueprint(qr_routes)
-    qrapp.run(debug=True, port=50001)
+# if __name__ == "__main__":
+#     from flask import Flask
+#     qrapp = Flask(__name__)
+#     qrapp.register_blueprint(qr_routes)
+#     qrapp.run(debug=True, port=50001)
