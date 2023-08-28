@@ -1,22 +1,19 @@
 from flask import jsonify
-import sqlite3
 from logging import getLogger
+from models._init_ import cursor, conn
 
 logger = getLogger("main")
 
 
-def prepare_data():
+def prepare_get_data():
     """
-    This method prepares data from data db
+    This method get data from data db
     """
-    logger.info("Start preparing the data")
-    conn = sqlite3.connect('data.db')
-    cursor = conn.cursor()
+    logger.info("Data preparation started")
 
     cursor.execute("SELECT * FROM data ORDER BY id DESC LIMIT 1")
     latest_data = cursor.fetchone()
-
-    conn.close()
+    logger.debug(f"Latest Data: {latest_data}")
 
     if latest_data:
         data = {
@@ -30,3 +27,21 @@ def prepare_data():
         }
     logger.info(f"Data preparation completed: {data}")
     return jsonify(data)
+
+
+def prepare_send_data(data):
+    """
+    This method populate the data into the db
+    """
+    if data:
+        temperature = data.get("temperature")
+        latitude = data.get("latitude")
+        longitude = data.get("longitude")
+        cursor.execute('''
+            INSERT INTO data (temperature, latitude, longitude)
+            VALUES (?, ?, ?)
+        ''', (temperature, latitude, longitude))
+        conn.commit()
+        return jsonify({"message": "Data saved successfully"})
+    else:
+        return jsonify({"error": "No data provided"}), 400
