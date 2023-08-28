@@ -1,28 +1,18 @@
 from flask import Blueprint, request, jsonify
 import sqlite3
+from services.data_service import prepare_data
 
 data_routes = Blueprint("data_routes", __name__)
 
 # New route to fetch updated data from the database
 @data_routes.route("/get_data", methods=["GET"])
 def get_data():
-    conn = sqlite3.connect('data.db')
-    cursor = conn.cursor()
+    try:
+        resp = prepare_data()
+    except Exception as err:
+        raise Exception("Error occurred while getting the data")
+    return resp
 
-    cursor.execute("SELECT * FROM data ORDER BY id DESC LIMIT 1")
-    latest_data = cursor.fetchone()
-
-    conn.close()
-
-    if latest_data:
-        data = {
-            "temperature": latest_data[1],
-            "latitude": latest_data[2],
-            "longitude": latest_data[3]
-        }
-        return jsonify(data)
-    else:
-        return jsonify({"message": "No data available"})
 
 @data_routes.route("/send_data", methods=["POST"])
 def send_data():
