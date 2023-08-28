@@ -3,18 +3,31 @@
     Create a margin for the page.
 */
 body {
-    background-color: rgb(33, 37, 41);
+    background-color: rgb(255, 255, 255);
     color: white;
     margin: 5%;
     /*overflow: hidden;*/
+    
 }
 
+p {
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
 .spacer {
     margin-top: 2vh;
 }
 
 .card {
     width: 100%;
+}
+.card-header {
+    width: 100%; 
+    background-color: #f3a007;
+    color: white;
+    font-weight: 700;
+    font-size: 25px
 }
 
 .card-body {
@@ -33,7 +46,11 @@ body {
     background-color: #6c757d;
     border-color: #6c757d;
 }
-
+.btn-info {
+    color: #000  !important;
+    background-color: #ededed  !important;
+    border-color: #a3a3a34a !important;
+}
 /*
     Remove the highlight on the buttons when tapped.
     This makes it less "web page-y" by removing the browser's outline of the link button.
@@ -64,4 +81,19 @@ body {
 #newsBody {
     overflow-y: scroll;
     height: 150px;
+}
+
+#qrCodeContainer > div .col-md-6{
+    max-width: 100%;
+
+}
+
+#qrCodeContainer {
+    max-width: 100%;
+
+}
+#main_div{
+    box-shadow: -1px 0px 20px 12px #0000001f;
+    color: black;
+    background-color: white;
 }

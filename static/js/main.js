@@ -123,23 +123,24 @@ function updateContinueButton() {
 
 function generateQRCode() {
     const quantity = document.getElementById("quantity").innerText;
-    const amount = quantity * 10; // Assuming each unit costs 10
+    //const amount = quantity * 10; // Assuming each unit costs 10
 
     fetch("/generate_qr", {  // Update the URL to the new Flask app's endpoint
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ "amount": amount })
+        body: JSON.stringify({ "quantity": quantity })
     })
     .then(response => response.json())
     .then(data => {
         const qrCodeImage = document.getElementById("qrCodeImage");
         qrCodeImage.src = "data:image/jpeg;base64," + data.qr_code;  // Assuming data.qr_code contains the base64 image
         document.getElementById("qrCodeContainer").style.display = "block";
+        document.getElementById("quantity_div").style.display = "none";
+        console.log("jabba gaya")
     })
     .catch(error => {
         console.error("Error:", error);
     });
 }
-

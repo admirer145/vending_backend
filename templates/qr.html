@@ -29,7 +29,7 @@
 <bodystyle="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4;">
 
     <!-- System Panel -->
-    <div class='card text-white bg-dark mb-3'>
+    <div id="main_div" class='card  mb-3'>
         <div class='card-header lead text-center'>
             Smart Vending Machine
         </div>
@@ -40,10 +40,10 @@
                         <p>{{ bootTime }}</p>
                     </div>
                 </div>
-                <div class='row justify-content-center'>
+                <div id="quantity_div" class='row justify-content-center'>
                     <div class='col-md-6 text-center'>
                         <div>
-                            <p>select quantity : <span id="quantity">0</span>
+                            <p>Select Quantity : <span id="quantity">0</span>
                                 <button type="button" class="btn btn-info" onclick="increaseQuantity();">+</button>
                                 <button type="button" class="btn btn-info" onclick="decreaseQuantity();">-</button>
                             </p>
@@ -53,9 +53,10 @@
                         <button type="button" class="btn btn-success" id="payButton" style="display: none;">Pay Now</button>
                     </div>
                 </div>
-                <div class='row justify-content-center' id="qrCodeContainer" style="display: none;">
-                    <div class='col-md-6 text-center'>
+                <div   id="qrCodeContainer" style="display: none;">
+                    <div class='text-center'>
                         
+                        <h3>PAYMENT</h3>
                         <img id="qrCodeImage" src="" alt="QR Code" width="250" height="250">
                         <h3>Scan this QR code to Pay</h3>
                     </div>
